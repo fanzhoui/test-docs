@@ -61,6 +61,19 @@ const config: Config = {
     ],
   ],
 
+  // 第二个文档实例（产品B），与产品A(默认 docs 实例)分开
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'b', // 实例 id
+        path: 'docs-b', // 内容目录
+        routeBasePath: 'docs-b', // 路由前缀，访问 /docs-b/...
+        sidebarPath: './sidebars-b.ts',
+      },
+    ],
+  ],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
@@ -75,10 +88,29 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'docs',
+          type: 'dropdown',
+          label: '产品A',
           position: 'left',
-          label: '文档',
+          items: [
+            {
+              type: 'docSidebar',
+              sidebarId: 'docs',
+              label: '产品A 文档',
+            },
+          ],
+        },
+        {
+          type: 'dropdown',
+          label: '产品B',
+          position: 'left',
+          items: [
+            {
+              type: 'docSidebar',
+              sidebarId: 'docsB',
+              docsPluginId: 'b',
+              label: '产品B 文档',
+            },
+          ],
         },
         {to: '/blog', label: '博客', position: 'left'},
         {
